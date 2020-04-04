@@ -2,19 +2,18 @@
 const Item = use('App/Models/Item')
 class ItemController {
   async index ({ params }) {
-    const items = await Item.query().where('order_id', params.orders_id).with('order').fetch()
+    const items = await Item.query().where('order_id', params.orders_id).fetch()
     return items
   }
 
   async store ({ request, params }) {
-    const data = request.only(['qtd', 'title', 'price'])
+    const data = request.only(['qtd', 'title', 'price', 'tag'])
     const item = await Item.create({ ...data, order_id: params.orders_id })
     return item
   }
 
   async show ({ params }) {
     const item = await Item.findOrFail(params.id)
-    await item.load('order ')
     return item
   }
 

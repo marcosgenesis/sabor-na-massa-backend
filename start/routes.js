@@ -22,4 +22,5 @@ Route.group(() => {
         ]
       ]
     ))
+  Route.resource('clients', 'ClientController')
 }).middleware(['auth'])

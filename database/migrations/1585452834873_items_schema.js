@@ -3,9 +3,9 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class OrderAdressSchema extends Schema {
+class ItemsSchema extends Schema {
   up () {
-    this.create('order_addresses', (table) => {
+    this.create('items', (table) => {
       table.increments()
       table
         .integer('order_id')
@@ -15,18 +15,17 @@ class OrderAdressSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
         .notNullable()
-      table.string('street').notNullable()
-      table.integer('number').notNullable()
-      table.string('district')
-      table.string('city').notNullable()
-      table.string('state').notNullable()
+      table.float('price')
+      table.string('title')
+      table.string('tag')
+      table.integer('qtd')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('order_adresses')
+    this.drop('items')
   }
 }
 
-module.exports = OrderAdressSchema
+module.exports = ItemsSchema

@@ -5,7 +5,7 @@ const BaseExceptionHandler = use('BaseExceptionHandler')
 
 /**
  * This class handles all exceptions thrown during
- * the HTTP request lifecycle.
+ * the HT TP request lifecycle.
  *
  * @class ExceptionHandler
  */

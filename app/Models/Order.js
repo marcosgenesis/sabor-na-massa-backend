@@ -1,6 +1,5 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
 class Order extends Model {
@@ -8,8 +7,12 @@ class Order extends Model {
     return this.hasMany('App/Models/Item')
   }
 
+  client () {
+    return this.belongsTo('App/Models/Client')
+  }
+
   address () {
-    return this.hasOne('App/Models/OrderAddress')
+    return this.belongsTo('App/Models/ClientAddress')
   }
 }
 

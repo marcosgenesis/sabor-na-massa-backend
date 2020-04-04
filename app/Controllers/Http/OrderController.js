@@ -1,22 +1,16 @@
 'use strict'
-const Database = use('Database')
 const Order = use('App/Models/Order')
 class OrderController {
   async index ({ request }) {
     const { page } = request.get()
-    const projects = await Order.query().with('items').paginate(page)
-    return projects
+    const orders = await Order.query().with('client').with('address').with('items').paginate(page)
+
+    return orders
   }
 
   async store ({ request }) {
-    const data = request.only('client_name')
-    const address = request.input('address')
-    const trx = await Database.beginTransaction()
-
-    const order = await Order.create(data, trx)
-    await order.address().create(address, trx)
-
-    await trx.commit()
+    const data = request.all()
+    const order = await Order.create(data)
     return order
   }
 
